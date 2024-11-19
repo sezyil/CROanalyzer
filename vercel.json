@@ -1,18 +1,32 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "cleanUrls": true,
+  "public": true,
+  "github": {
+    "enabled": true,
+    "silent": true
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate"
+        }
+      ]
+    }
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/backend/src/index.ts"
-    },
-    {
-      "handle": "filesystem"
+      "dest": "/api/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/dist/$1"
+      "dest": "/index.html"
     }
   ]
 }
