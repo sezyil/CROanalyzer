@@ -2,15 +2,16 @@
   "name": "cro-analyzer",
   "version": "1.0.0",
   "description": "AI-Powered CRO Analysis Platform",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
-    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
-    "build": "cd frontend && npm run build && cd ../backend && npm run build",
-    "start": "cd backend && npm start",
-    "dev": "concurrently \"cd frontend && npm run dev\" \"cd backend && npm run dev\"",
-    "test": "concurrently \"cd frontend && npm test\" \"cd backend && npm test\"",
-    "prisma:generate": "cd backend && npx prisma generate",
-    "prisma:migrate": "cd backend && npx prisma migrate dev",
-    "prisma:studio": "cd backend && npx prisma studio"
+    "build": "npm run build --workspace=frontend",
+    "start": "npm run start --workspace=backend",
+    "dev": "concurrently \"npm run dev --workspace=frontend\" \"npm run dev --workspace=backend\"",
+    "test": "npm run test --workspace=frontend && npm run test --workspace=backend"
   },
   "devDependencies": {
     "concurrently": "^8.2.0",
